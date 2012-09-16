@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppacitiveAutomationFramework", "AppacitiveAutomation\AppacitiveAutomationFramework.csproj", "{8EEB6F9F-F03E-482B-ACE4-0685D2978B89}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{16A24297-D05F-4EF2-B2F2-BBCBA550DBE8}"
+	ProjectSection(SolutionItems) = preProject
+		References\Castle.Core.dll = References\Castle.Core.dll
+		References\Ionic.Zip.dll = References\Ionic.Zip.dll
+		References\Newtonsoft.Json.dll = References\Newtonsoft.Json.dll
+		References\Selenium.WebDriverBackedSelenium.dll = References\Selenium.WebDriverBackedSelenium.dll
+		References\Selenium.WebDriverBackedSelenium.pdb = References\Selenium.WebDriverBackedSelenium.pdb
+		References\Selenium.WebDriverBackedSelenium.xml = References\Selenium.WebDriverBackedSelenium.xml
+		References\Tavisca.Testing.Platform.dll = References\Tavisca.Testing.Platform.dll
+		References\Tavisca.Testing.Platform.pdb = References\Tavisca.Testing.Platform.pdb
+		References\ThoughtWorks.Selenium.Core.dll = References\ThoughtWorks.Selenium.Core.dll
+		References\ThoughtWorks.Selenium.Core.pdb = References\ThoughtWorks.Selenium.Core.pdb
+		References\ThoughtWorks.Selenium.Core.xml = References\ThoughtWorks.Selenium.Core.xml
+		References\WebDriver.dll = References\WebDriver.dll
+		References\WebDriver.pdb = References\WebDriver.pdb
+		References\WebDriver.Support.dll = References\WebDriver.Support.dll
+		References\WebDriver.Support.pdb = References\WebDriver.Support.pdb
+		References\WebDriver.Support.xml = References\WebDriver.Support.xml
+		References\WebDriver.xml = References\WebDriver.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B32F965-935C-4FBF-8223-A3F9BE3ECEFD}"
+	ProjectSection(SolutionItems) = preProject
+		AppacitiveAutomation.vsmdi = AppacitiveAutomation.vsmdi
+		Local.testsettings = Local.testsettings
+		TextFile1.txt = TextFile1.txt
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = AppacitiveAutomation.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8EEB6F9F-F03E-482B-ACE4-0685D2978B89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EEB6F9F-F03E-482B-ACE4-0685D2978B89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EEB6F9F-F03E-482B-ACE4-0685D2978B89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EEB6F9F-F03E-482B-ACE4-0685D2978B89}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
