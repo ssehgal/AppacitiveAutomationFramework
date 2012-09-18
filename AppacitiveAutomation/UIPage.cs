@@ -43,7 +43,9 @@ namespace AppacitiveAutomationFramework
                 }
             });
             if (toReturn == null) throw e;
-            return new UIElement(toReturn);
+            var element = new UIElement(toReturn);
+            element.Driver = _driver;
+            return element;
         }
 
         public void SetDriver(IWebDriver driver)

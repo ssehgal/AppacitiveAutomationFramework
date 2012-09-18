@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 namespace AppacitiveAutomationFramework
 {
     public class UIElement : IWebElement, IUIWebElement
     {
         private IWebElement _element;
-
+        internal IWebDriver Driver { get; set; }
         public UIElement(IWebElement element)
         {
             _element = element;
@@ -23,6 +24,14 @@ namespace AppacitiveAutomationFramework
         public void Click()
         {
             _element.Click();
+        }
+
+        public void DoubleClick()
+        {
+            Actions action = new Actions(Driver);
+            action.DoubleClick(this);
+            action.Perform();
+
         }
 
         public bool Displayed
