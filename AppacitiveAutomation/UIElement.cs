@@ -29,8 +29,7 @@ namespace AppacitiveAutomationFramework
         public void DoubleClick()
         {
             Actions action = new Actions(Driver);
-            action.DoubleClick(this);
-            action.Perform();
+            action.DoubleClick(this).Build().Perform();
 
         }
 
