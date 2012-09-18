@@ -199,5 +199,6 @@ namespace AppacitiveAutomationFramework
         //     will be submitted to the web server. If this causes the current page to change,
         //     then this method will block until the new page is loaded.
         void Submit();
+        void DoubleClick();
     }
 }
