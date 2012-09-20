@@ -36,18 +36,11 @@ namespace AppacitiveAutomationFramework
         {
             var csvreader = new CSVReader();
             
-            string t = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            t = AppDomain.CurrentDomain.BaseDirectory + @"\Controls\";
-            string solutionDirectory = System.IO.Path.GetDirectoryName(t);
-            // var basePath = solutionDirectory + @"\..\..\Controls\";
-            var basePath = System.IO.Path.GetFullPath("..//..//..//Controls//");
-            if (!Directory.Exists(basePath))
-                throw new Exception("Failed to find directory: " + basePath + "!");
 
-            if (!File.Exists(basePath + fileName))
-                throw new Exception("Failed to find file: " + basePath + fileName + "!");
+            if (!File.Exists(fileName))
+                throw new Exception("Failed to find file: " + fileName + "!");
 
-            var reader = new StreamReader(File.OpenRead(basePath + fileName));
+            var reader = new StreamReader(File.OpenRead(AppDomain.CurrentDomain.BaseDirectory +"\\" + fileName));
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
