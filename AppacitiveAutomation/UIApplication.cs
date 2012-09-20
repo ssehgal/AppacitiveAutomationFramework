@@ -35,6 +35,7 @@ namespace AppacitiveAutomationFramework
 
         public void Launch(string url)
         {
+            _driver.Manage().Window.Maximize();
             _driver.Url = url;
         }
 
