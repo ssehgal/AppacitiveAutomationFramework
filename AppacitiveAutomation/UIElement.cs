@@ -23,7 +23,10 @@ namespace AppacitiveAutomationFramework
 
         public void Click()
         {
-            _element.Click();
+            Actions builder = new Actions(Driver);
+            // WebElement tagElement = driver.findElement(By.id("tag-cloud"));
+            builder.MoveToElement(this._element).Click(this._element).Build().Perform();
+           // _element.Click();
         }
 
         public void DoubleClick()
@@ -31,6 +34,14 @@ namespace AppacitiveAutomationFramework
             Actions action = new Actions(Driver);
             action.DoubleClick(this).Build().Perform();
 
+        }
+
+        public void MoveToElement()
+        {
+            Actions builder = new Actions(Driver);
+           // WebElement tagElement = driver.findElement(By.id("tag-cloud"));
+            builder.MoveToElement(this._element).Build().Perform();
+            
         }
 
         public bool Displayed

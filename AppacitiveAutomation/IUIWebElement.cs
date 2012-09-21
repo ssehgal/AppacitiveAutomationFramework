@@ -200,5 +200,6 @@ namespace AppacitiveAutomationFramework
         //     then this method will block until the new page is loaded.
         void Submit();
         void DoubleClick();
+        void MoveToElement();
     }
 }

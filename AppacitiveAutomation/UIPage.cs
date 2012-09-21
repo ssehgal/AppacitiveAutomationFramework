@@ -66,5 +66,6 @@ namespace AppacitiveAutomationFramework
         {
             ((IJavaScriptExecutor)_driver).ExecuteScript(js);
         }
+
     }
 }
