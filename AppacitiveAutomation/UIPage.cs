@@ -42,15 +42,29 @@ namespace AppacitiveAutomationFramework
                     }
                 }
             });
-            if (toReturn == null) throw e;
+            if (toReturn == null) return null;
             var element = new UIElement(toReturn);
             element.Driver = _driver;
             return element;
         }
 
+        //protected IUIWebElement TryGetElementBySelector(string controlName)
+        //{
+        //    try
+        //    {
+        //        return GetUIElementBySelector(controlName);
+        //    }
+        //    catch { return null; }
+        //}
+
         public void SetDriver(IWebDriver driver)
         {
             _driver = driver;
+        }
+
+        public void ExecuteJavascript(string js)
+        {
+            ((IJavaScriptExecutor)_driver).ExecuteScript(js);
         }
     }
 }
