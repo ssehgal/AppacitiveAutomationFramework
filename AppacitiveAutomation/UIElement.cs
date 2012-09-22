@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace AppacitiveAutomationFramework
 {
@@ -42,6 +43,13 @@ namespace AppacitiveAutomationFramework
            // WebElement tagElement = driver.findElement(By.id("tag-cloud"));
             builder.MoveToElement(this._element).Build().Perform();
             
+        }
+
+        public void SelectFromDropDown(string value)
+        {
+            SelectElement select = new SelectElement(this._element);
+            //select.DeselectAll();
+            select.SelectByText(value);
         }
 
         public bool Displayed

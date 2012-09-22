@@ -201,5 +201,6 @@ namespace AppacitiveAutomationFramework
         void Submit();
         void DoubleClick();
         void MoveToElement();
+        void SelectFromDropDown(string value);
     }
 }
