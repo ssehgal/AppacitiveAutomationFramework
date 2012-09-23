@@ -48,6 +48,45 @@ namespace AppacitiveAutomationFramework
             return element;
         }
 
+        protected List<IUIWebElement> GetUIElements(string controlName)
+        {
+            var list=new List<IWebElement>();
+            Exception e = null;
+            _controls.ForEach(x =>
+            {
+                if (x[controlName] != null)
+                {
+                    for (var i = 0; i < 10; i = i + 1)
+                    {
+                        try
+                        {
+                            list = _driver.FindElements(By.CssSelector(x[controlName])).ToList();
+                        }
+                        catch (Exception e1)
+                        {
+                            Console.WriteLine("could not get element");
+                            e = e1;
+                        }
+                    }
+                }
+            });
+
+            // create an empty list of IUIWebElements (eg 'resultList')
+            // iterate over the list of IWebElements ('list')
+            // for each element of 'list', create an element of IUIWebElement and add to resultList
+            // return resultList
+            if (list == null) return null;
+            var resultList = new List<IUIWebElement>();
+            for (var i = 0; i < list.Count; i++)
+            {
+                var element = new UIElement(list[i]);
+                element.Driver = _driver;
+                resultList.Add(element);
+            }
+            return resultList;
+        }
+
+
         //protected IUIWebElement TryGetElementBySelector(string controlName)
         //{
         //    try
