@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using EnvDTE;
 
 namespace AppacitiveAutomationFramework
 {
@@ -33,6 +35,8 @@ namespace AppacitiveAutomationFramework
                         try
                         {
                             toReturn = _driver.FindElement(By.CssSelector(x[controlName]));
+                            if (toReturn != null)
+                                break;
                         }
                         catch (Exception e1)
                         {
@@ -48,9 +52,91 @@ namespace AppacitiveAutomationFramework
             return element;
         }
 
+        protected IUIWebElement WaitAndGetBySelector(string controlName, int timeInSeconds)
+        {
+            // wait in 500ms intervals for the element to appear
+            // the number of checks we have to perform
+            var numChecks = timeInSeconds * 1000 / 500;
+            
+            // the number of checks completed
+            var numChecksDone = 0;
+
+            while (numChecksDone < numChecks)
+            {
+                var _uiElement = GetUIElementBySelector(controlName);
+                if (_uiElement == null)
+                {
+                    numChecksDone++;
+                }
+                else
+                {
+                    return _uiElement;
+                }
+                System.Threading.Thread.Sleep(500);
+            }
+            return null;
+        }
+
+        protected IUIWebElement WaitAndGetBySelector2(string controlName, int time)
+        {
+            IWebElement toReturn = null;
+            _controls.ForEach(x =>
+            {
+                if (x[controlName] != null)
+                {
+                    WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(time));
+                    wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+                    toReturn = wait.Until<IWebElement>((d) =>
+                    {
+                        try
+                        {
+                            d.FindElement(By.CssSelector(x[controlName]));
+                            return d.FindElement(By.CssSelector(x[controlName]));
+                        }
+                        catch
+                        {
+                            return null;
+                        }
+                    });
+
+                }
+            });
+            if (toReturn == null) return null;
+            var element = new UIElement(toReturn);
+            element.Driver = _driver;
+            return element;
+        }
+
+        protected IUIWebElement GetUIElementById(string controlName)
+        {
+            IWebElement toReturn = null;
+            Exception e = null;
+            _controls.ForEach(x =>
+            {
+                if (x[controlName] != null)
+                {
+                    for (var i = 0; i < 10; i = i + 1)
+                    {
+                        try
+                        {
+                            toReturn = _driver.FindElement(By.Id(x[controlName]));
+                        }
+                        catch (Exception e1)
+                        {
+                            Console.WriteLine("could not get id of element");
+                            e = e1;
+                        }
+                    }
+                }
+            });
+            if (toReturn == null) return null;
+            var element = new UIElement(toReturn);
+            element.Driver = _driver;
+            return element;
+        }
         protected List<IUIWebElement> GetUIElements(string controlName)
         {
-            var list=new List<IWebElement>();
+            var list = new List<IWebElement>();
             Exception e = null;
             _controls.ForEach(x =>
             {
@@ -70,6 +156,8 @@ namespace AppacitiveAutomationFramework
                     }
                 }
             });
+
+
 
             // create an empty list of IUIWebElements (eg 'resultList')
             // iterate over the list of IWebElements ('list')
