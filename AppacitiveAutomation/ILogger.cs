@@ -7,6 +7,6 @@ namespace AppacitiveAutomationFramework
 {
     public interface ILogger
     {
-        void Log(string message, int priority = 0);
+        void Log(string message, int priority = 1);
     }
 }
