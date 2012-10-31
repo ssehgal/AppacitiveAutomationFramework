@@ -11,10 +11,17 @@ namespace AppacitiveAutomationFramework
     public class UIElement : IWebElement, IUIWebElement
     {
         private IWebElement _element;
+        private string _controlName = string.Empty;
         internal IWebDriver Driver { get; set; }
         public UIElement(IWebElement element)
         {
             _element = element;
+        }
+
+        public UIElement(IWebElement element, string controlName)
+        {
+            _element = element;
+            _controlName = controlName;
         }
 
         public void Clear()
@@ -24,16 +31,20 @@ namespace AppacitiveAutomationFramework
 
         public void Click()
         {
+            LogProvider.DefaultLogger.Log("Going to click on " + _controlName);
             Actions builder = new Actions(Driver);
             // WebElement tagElement = driver.findElement(By.id("tag-cloud"));
             builder.MoveToElement(this._element).Click(this._element).Build().Perform();
+            LogProvider.DefaultLogger.Log("Clicked successfully on " + _controlName);
            // _element.Click();
         }
 
         public void DoubleClick()
         {
+            LogProvider.DefaultLogger.Log("Going to double-click on " + _controlName);
             Actions action = new Actions(Driver);
             action.DoubleClick(this).Build().Perform();
+            LogProvider.DefaultLogger.Log("Double clicked successfully on" + _controlName);
 
         }
 
@@ -47,9 +58,11 @@ namespace AppacitiveAutomationFramework
 
         public void SelectFromDropDown(string value)
         {
+            LogProvider.DefaultLogger.Log("Goint to select " + value + " from " + _controlName);
             SelectElement select = new SelectElement(this._element);
             //select.DeselectAll();
             select.SelectByText(value);
+            LogProvider.DefaultLogger.Log("Successfully selected " + value + " from " + _controlName);
         }
 
         public bool Displayed

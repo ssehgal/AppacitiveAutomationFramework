@@ -79,8 +79,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleLogger.cs" />
     <Compile Include="DriverProvider.cs" />
+    <Compile Include="ILogger.cs" />
     <Compile Include="IUIWebElement.cs" />
+    <Compile Include="LogProvider.cs" />
     <Compile Include="UIApplication.cs" />
     <Compile Include="CSVReader.cs" />
     <Compile Include="UIElement.cs" />

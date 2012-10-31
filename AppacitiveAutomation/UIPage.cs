@@ -34,26 +34,32 @@ namespace AppacitiveAutomationFramework
                     {
                         try
                         {
+                            LogProvider.DefaultLogger.Log("Looking for: " + controlName);
                             toReturn = _driver.FindElement(By.CssSelector(x[controlName]));
                             if (toReturn != null)
+                            {
+                                LogProvider.DefaultLogger.Log("Got " + controlName);
                                 break;
+                            }
                         }
                         catch (Exception e1)
                         {
-                            Console.WriteLine("could not get element " + controlName);
+                            LogProvider.DefaultLogger.Log("Could not get " + controlName);
                             e = e1;
                         }
                     }
                 }
             });
             if (toReturn == null) return null;
-            var element = new UIElement(toReturn);
+            var element = new UIElement(toReturn, controlName);
             element.Driver = _driver;
             return element;
         }
 
         protected IUIWebElement WaitAndGetBySelector(string controlName, int timeInSeconds)
         {
+            LogProvider.DefaultLogger.Log("Started waiting for " + controlName + " for maximum " + timeInSeconds + " sec");
+
             // wait in 500ms intervals for the element to appear
             // the number of checks we have to perform
             var numChecks = timeInSeconds * 1000 / 500;
@@ -66,10 +72,12 @@ namespace AppacitiveAutomationFramework
                 var _uiElement = GetUIElementBySelector(controlName);
                 if (_uiElement == null)
                 {
+                    LogProvider.DefaultLogger.Log("Element not present yet.");
                     numChecksDone++;
                 }
                 else
                 {
+                    LogProvider.DefaultLogger.Log("Got element.");
                     return _uiElement;
                 }
                 System.Threading.Thread.Sleep(500);
@@ -102,7 +110,7 @@ namespace AppacitiveAutomationFramework
                 }
             });
             if (toReturn == null) return null;
-            var element = new UIElement(toReturn);
+            var element = new UIElement(toReturn, controlName);
             element.Driver = _driver;
             return element;
         }
@@ -119,18 +127,20 @@ namespace AppacitiveAutomationFramework
                     {
                         try
                         {
+                            LogProvider.DefaultLogger.Log("Looking for: " + controlName);
                             toReturn = _driver.FindElement(By.Id(x[controlName]));
+                            LogProvider.DefaultLogger.Log("Got " + controlName);
                         }
                         catch (Exception e1)
                         {
-                            Console.WriteLine("could not get id of element");
+                            LogProvider.DefaultLogger.Log("Could not get " + controlName);
                             e = e1;
                         }
                     }
                 }
             });
             if (toReturn == null) return null;
-            var element = new UIElement(toReturn);
+            var element = new UIElement(toReturn, controlName);
             element.Driver = _driver;
             return element;
         }
@@ -146,11 +156,13 @@ namespace AppacitiveAutomationFramework
                     {
                         try
                         {
+                            LogProvider.DefaultLogger.Log("Trying to get " + controlName);
                             list = _driver.FindElements(By.CssSelector(x[controlName])).ToList();
+                            LogProvider.DefaultLogger.Log("Got " + controlName);
                         }
                         catch (Exception e1)
                         {
-                            Console.WriteLine("could not get element");
+                            LogProvider.DefaultLogger.Log("Could not get " + controlName);
                             e = e1;
                         }
                     }
@@ -167,7 +179,7 @@ namespace AppacitiveAutomationFramework
             var resultList = new List<IUIWebElement>();
             for (var i = 0; i < list.Count; i++)
             {
-                var element = new UIElement(list[i]);
+                var element = new UIElement(list[i], controlName);
                 element.Driver = _driver;
                 resultList.Add(element);
             }
