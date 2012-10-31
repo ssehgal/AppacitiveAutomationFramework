@@ -40,7 +40,7 @@ namespace AppacitiveAutomationFramework
                         }
                         catch (Exception e1)
                         {
-                            Console.WriteLine("could not get element");
+                            Console.WriteLine("could not get element " + controlName);
                             e = e1;
                         }
                     }
