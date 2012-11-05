@@ -59,10 +59,10 @@ namespace AppacitiveAutomationFramework
         {
             get
             {
-                if (_data.ContainsKey(controlName)) 
-                    return _data[controlName]; 
-                else 
-                    throw new Exception("Could not find key: " + controlName);
+                if (_data.ContainsKey(controlName))
+                    return _data[controlName];
+                else
+                    return null;
             }
         }
     }

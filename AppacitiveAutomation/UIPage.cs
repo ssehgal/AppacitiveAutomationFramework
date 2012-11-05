@@ -5,6 +5,7 @@ using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using EnvDTE;
+using System.Threading;
 
 namespace AppacitiveAutomationFramework
 {
@@ -26,6 +27,7 @@ namespace AppacitiveAutomationFramework
         {
             IWebElement toReturn = null;
             Exception e = null;
+            System.Threading.Thread.Sleep(1000);
             _controls.ForEach(x =>
             {
                 if (x[controlName] != null)
@@ -53,6 +55,7 @@ namespace AppacitiveAutomationFramework
             if (toReturn == null) return null;
             var element = new UIElement(toReturn, controlName);
             element.Driver = _driver;
+            System.Threading.Thread.Sleep(1000);
             return element;
         }
 
@@ -63,7 +66,7 @@ namespace AppacitiveAutomationFramework
             // wait in 500ms intervals for the element to appear
             // the number of checks we have to perform
             var numChecks = timeInSeconds * 1000 / 500;
-            
+            System.Threading.Thread.Sleep(2000);
             // the number of checks completed
             var numChecksDone = 0;
 
@@ -82,43 +85,15 @@ namespace AppacitiveAutomationFramework
                 }
                 System.Threading.Thread.Sleep(500);
             }
+            System.Threading.Thread.Sleep(2000);
             return null;
-        }
-
-        protected IUIWebElement WaitAndGetBySelector2(string controlName, int time)
-        {
-            IWebElement toReturn = null;
-            _controls.ForEach(x =>
-            {
-                if (x[controlName] != null)
-                {
-                    WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(time));
-                    wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                    toReturn = wait.Until<IWebElement>((d) =>
-                    {
-                        try
-                        {
-                            d.FindElement(By.CssSelector(x[controlName]));
-                            return d.FindElement(By.CssSelector(x[controlName]));
-                        }
-                        catch
-                        {
-                            return null;
-                        }
-                    });
-
-                }
-            });
-            if (toReturn == null) return null;
-            var element = new UIElement(toReturn, controlName);
-            element.Driver = _driver;
-            return element;
         }
 
         protected IUIWebElement GetUIElementById(string controlName)
         {
             IWebElement toReturn = null;
             Exception e = null;
+            System.Threading.Thread.Sleep(2000);
             _controls.ForEach(x =>
             {
                 if (x[controlName] != null)
@@ -129,7 +104,11 @@ namespace AppacitiveAutomationFramework
                         {
                             LogProvider.DefaultLogger.Log("Looking for: " + controlName);
                             toReturn = _driver.FindElement(By.Id(x[controlName]));
-                            LogProvider.DefaultLogger.Log("Got " + controlName);
+                            if (toReturn != null)
+                            {
+                                LogProvider.DefaultLogger.Log("Got " + controlName);
+                                break;
+                            }
                         }
                         catch (Exception e1)
                         {
@@ -142,12 +121,14 @@ namespace AppacitiveAutomationFramework
             if (toReturn == null) return null;
             var element = new UIElement(toReturn, controlName);
             element.Driver = _driver;
+            System.Threading.Thread.Sleep(2000);
             return element;
         }
         protected List<IUIWebElement> GetUIElements(string controlName)
         {
             var list = new List<IWebElement>();
             Exception e = null;
+            System.Threading.Thread.Sleep(1000);
             _controls.ForEach(x =>
             {
                 if (x[controlName] != null)
@@ -158,7 +139,11 @@ namespace AppacitiveAutomationFramework
                         {
                             LogProvider.DefaultLogger.Log("Trying to get " + controlName);
                             list = _driver.FindElements(By.CssSelector(x[controlName])).ToList();
-                            LogProvider.DefaultLogger.Log("Got " + controlName);
+                            if (list != null)
+                            {
+                                LogProvider.DefaultLogger.Log("Got " + controlName);
+                                break;
+                            }
                         }
                         catch (Exception e1)
                         {
@@ -183,6 +168,7 @@ namespace AppacitiveAutomationFramework
                 element.Driver = _driver;
                 resultList.Add(element);
             }
+            System.Threading.Thread.Sleep(1000);
             return resultList;
         }
 
