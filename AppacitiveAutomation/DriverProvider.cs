@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.IE;
 
 namespace AppacitiveAutomationFramework
 {
@@ -14,18 +12,31 @@ namespace AppacitiveAutomationFramework
         Chrome
     }
 
+    public enum ExecutionType
+    {
+        Sequence,
+        Parallel
+    }
+
     internal static class DriverProvider
     {
-        public static IWebDriver GetDriver(AvailableDrivers driverType)
+        public static IWebDriver GetDriver(string driver)
         {
-            switch (driverType)
+            switch (driver.ToLower())
             {
-                case AvailableDrivers.Firefox:
+                case "firefox":
                     return Firefox;
-                case AvailableDrivers.Chrome:
+                    break;
+                case "chrome":
                     return Chrome;
+                    break;
+                case "ie":
+                case "iexplore":
+                case "internetexplorer":
+                    return InternetExplorer;
+                    break;
                 default:
-                    throw new Exception("Unrecognized driver type: " + driverType.ToString());
+                    throw new Exception("Unrecognized driver type: " + driver);
             }
         }
 
@@ -37,6 +48,14 @@ namespace AppacitiveAutomationFramework
         private static IWebDriver Chrome
         {
             get { return new ChromeDriver(); }
+        }
+
+        private static IWebDriver InternetExplorer
+        {
+            get
+            {
+                return new InternetExplorerDriver();
+            }
         }
     }
 }

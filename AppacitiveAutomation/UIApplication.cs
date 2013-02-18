@@ -1,21 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Remote;
 
 namespace AppacitiveAutomationFramework
 {
     public abstract class UIApplication : IDisposable
     {
-        protected IWebDriver _driver;
-
-        protected abstract AvailableDrivers DriverType { get; }
+        protected IWebDriver Driver;
 
         public UIApplication()
         {
-            _driver = DriverProvider.GetDriver(DriverType);
+            switch (Configuration.Runner.ToLower())
+            {
+                case "local":
+                    Driver = DriverProvider.GetDriver(Configuration.Driver);
+                    break;
+                case "grid":
+                    //var selenium = new DefaultSelenium(Configuration.HubHost, Configuration.HubPort, GetBrowserString(Configuration.Driver), Configuration.BrowserUrl);
+                    Driver = new RemoteWebDriver(Configuration.GetRemoteAddress(Configuration.HubHost, Configuration.HubPort), Configuration.GetDesiredCapability(Configuration.Driver));
+                    break;
+                default:
+                    throw new Exception("Unrecognized test runner");
+            }
         }
 
         protected T InitializePage<T>(params string[] controlNames) where T : UIPage, new()
@@ -27,7 +33,7 @@ namespace AppacitiveAutomationFramework
             page.LoadControls(controlNames);
 
             // set the driver
-            page.SetDriver(_driver);
+            page.SetDriver(Driver);
 
             // return the created page
             return page as T;
@@ -35,16 +41,16 @@ namespace AppacitiveAutomationFramework
 
         public void Launch(string url)
         {
-            _driver.Manage().Window.Maximize();
-            _driver.Url = url;
+            Driver.Manage().Window.Maximize();
+            Driver.Url = url;
         }
 
         public void Dispose()
         {
-            _driver.Quit();
+            Driver.Quit();
         }
 
     }
 
-    
+
 }
