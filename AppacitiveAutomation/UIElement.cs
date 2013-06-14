@@ -39,6 +39,7 @@ namespace AppacitiveAutomationFramework
            // _element.Click();
         }
 
+
         public void DoubleClick()
         {
             LogProvider.DefaultLogger.Log("Going to double-click on " + _controlName);

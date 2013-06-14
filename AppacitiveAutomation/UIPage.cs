@@ -28,36 +28,38 @@ namespace AppacitiveAutomationFramework
             IWebElement toReturn = null;
             Exception e = null;
             System.Threading.Thread.Sleep(1000);
-            _controls.ForEach(x =>
-            {
-                if (x[controlName] != null)
+                _controls.ForEach(x =>
                 {
-                    for (var i = 0; i < 10; i = i + 1)
+                    if (x[controlName] != null)
                     {
-                        try
+                        for (var i = 0; i < 10; i = i + 1)
                         {
-                            LogProvider.DefaultLogger.Log("Looking for: " + controlName);
-                            toReturn = _driver.FindElement(By.CssSelector(x[controlName]));
-                            if (toReturn != null)
+                            try
                             {
-                                LogProvider.DefaultLogger.Log("Got " + controlName);
-                                break;
+                                LogProvider.DefaultLogger.Log("Looking for: " + controlName);
+                                toReturn = _driver.FindElement(By.CssSelector(x[controlName]));
+                                if (toReturn != null)
+                                {
+                                    LogProvider.DefaultLogger.Log("Got " + controlName);
+                                    break;
+                                }
+                            }
+                            catch (Exception e1)
+                            {
+                                LogProvider.DefaultLogger.Log("Could not get " + controlName);
+                                e = e1;
                             }
                         }
-                        catch (Exception e1)
-                        {
-                            LogProvider.DefaultLogger.Log("Could not get " + controlName);
-                            e = e1;
-                        }
                     }
-                }
-            });
+                });
+            
             if (toReturn == null) return null;
             var element = new UIElement(toReturn, controlName);
             element.Driver = _driver;
             System.Threading.Thread.Sleep(1000);
             return element;
         }
+
 
         protected IUIWebElement WaitAndGetBySelector(string controlName, int timeInSeconds)
         {
