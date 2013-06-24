@@ -88,6 +88,7 @@
     <Compile Include="LogProvider.cs" />
     <Compile Include="UIApplication.cs" />
     <Compile Include="CSVReader.cs" />
+    <Compile Include="UIControlCollection.cs" />
     <Compile Include="UIElement.cs" />
     <Compile Include="UIKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
