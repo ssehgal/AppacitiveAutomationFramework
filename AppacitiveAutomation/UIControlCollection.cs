@@ -116,6 +116,24 @@ namespace AppacitiveAutomationFramework
             return element;
         }
 
+        public void ChangeCurrentWindow(string windowHandle)
+        {
+            Driver.SwitchTo().Window(windowHandle);
+        }
+
+        public List<string> ReturnWindowHandles()
+        {
+            string handle;
+            var handleList=new List<string>();
+            for (int i = 0; i < Driver.WindowHandles.Count; i++)
+            {
+                handle = Driver.WindowHandles[i];
+                handleList.Add(handle);
+                handle="";
+            }
+            return handleList;
+        }
+
         public List<IUIWebElement> GetUIElements(string controlName)
         {
             var list = new List<IWebElement>();
