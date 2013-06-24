@@ -21,15 +21,15 @@ namespace AppacitiveAutomationFramework
         public UIPage LoadControls(params string[] controlFiles)
         {
             controlFiles.ToList().ForEach(x => _controls.Add(new UIControlSet(x)));
-            _controlCollection.Controls = _controls;
+            this.Controls = _controls;
             return this;
         }
 
         public void SetDriver(IWebDriver driver)
         {
             _driver = driver;
-            _controlCollection.Driver = driver;
-            _controlCollection.Context = driver;
+            this.Driver = driver;
+            this.Context = driver;
         }
 
         public void ExecuteJavascript(string js)
