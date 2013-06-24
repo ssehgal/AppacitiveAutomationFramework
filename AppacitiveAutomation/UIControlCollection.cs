@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 
 namespace AppacitiveAutomationFramework
 {
-    internal class UIControlCollection
+    public class UIControlCollection
     {
         internal List<UIControlSet> Controls = new List<UIControlSet>();
         internal IWebDriver Driver;
