@@ -202,5 +202,11 @@ namespace AppacitiveAutomationFramework
         void DoubleClick();
         void MoveToElement();
         void SelectFromDropDown(string value);
+
+        // Selecting
+        IUIWebElement GetUIElementBySelector(string controlName);
+        IUIWebElement WaitAndGetBySelector(string controlName, int timeInSeconds);
+        IUIWebElement GetUIElementById(string controlName);
+        List<IUIWebElement> GetUIElements(string controlName);
     }
 }
