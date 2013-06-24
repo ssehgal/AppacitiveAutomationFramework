@@ -8,7 +8,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AppacitiveAutomationFramework
 {
-    public class UIElement : IWebElement, IUIWebElement
+    public class UIElement : UIControlCollection, IWebElement, IUIWebElement
     {
         private IWebElement _element;
         private string _controlName = string.Empty;
