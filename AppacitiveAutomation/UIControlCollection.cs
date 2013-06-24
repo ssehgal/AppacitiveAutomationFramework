@@ -12,7 +12,7 @@ namespace AppacitiveAutomationFramework
         internal IWebDriver Driver;
         internal ISearchContext Context;
 
-        protected IUIWebElement GetUIElementBySelector(string controlName)
+        public IUIWebElement GetUIElementBySelector(string controlName)
         {
             IWebElement toReturn = null;
             Exception e = null;
@@ -50,7 +50,7 @@ namespace AppacitiveAutomationFramework
         }
 
 
-        protected IUIWebElement WaitAndGetBySelector(string controlName, int timeInSeconds)
+        public IUIWebElement WaitAndGetBySelector(string controlName, int timeInSeconds)
         {
             LogProvider.DefaultLogger.Log("Started waiting for " + controlName + " for maximum " + timeInSeconds + " sec");
 
@@ -78,7 +78,7 @@ namespace AppacitiveAutomationFramework
             return null;
         }
 
-        protected IUIWebElement GetUIElementById(string controlName)
+        public IUIWebElement GetUIElementById(string controlName)
         {
             IWebElement toReturn = null;
             Exception e = null;
@@ -115,7 +115,8 @@ namespace AppacitiveAutomationFramework
             System.Threading.Thread.Sleep(2000);
             return element;
         }
-        protected List<IUIWebElement> GetUIElements(string controlName)
+
+        public List<IUIWebElement> GetUIElements(string controlName)
         {
             var list = new List<IWebElement>();
             Exception e = null;
