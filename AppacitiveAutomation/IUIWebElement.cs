@@ -202,8 +202,10 @@ namespace AppacitiveAutomationFramework
         void DoubleClick();
         void MoveToElement();
         void SelectFromDropDown(string value);
-        void ChangeCurrentWindow(string windowHandle);
+        void ChangeCurrentWindow(string title);
         List<string> ReturnWindowHandles();
+        Dictionary<string, string> ReturnWindowHandlesWithTitles();
+        void ChangeCurrentWindowUsingIndex(string windowHandle);
         // Selecting
         IUIWebElement GetUIElementBySelector(string controlName);
         IUIWebElement WaitAndGetBySelector(string controlName, int timeInSeconds);

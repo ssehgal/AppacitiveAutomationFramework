@@ -73,7 +73,7 @@ namespace AppacitiveAutomationFramework
                     LogProvider.DefaultLogger.Log("Got element.");
                     return _uiElement;
                 }
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(1000);
             }
             return null;
         }
@@ -116,13 +116,40 @@ namespace AppacitiveAutomationFramework
             return element;
         }
 
-        public void ChangeCurrentWindow(string windowHandle)
+        //Change windows using title
+
+        public Dictionary<string, string> ReturnWindowHandlesWithTitles()
         {
-            Driver.SwitchTo().Window(windowHandle);
+            System.Threading.Thread.Sleep(2000);
+            Dictionary<string, string> handleTitleDictionary = new Dictionary<string, string>();
+            for (int i = 0; i < Driver.WindowHandles.Count; i++)
+            {
+                Driver.SwitchTo().Window(Driver.WindowHandles[i]);
+                handleTitleDictionary.Add(Driver.Title, Driver.WindowHandles[i]);
+            }
+            return handleTitleDictionary;
         }
+
+        public void ChangeCurrentWindow(string title)
+        {
+            System.Threading.Thread.Sleep(2000);
+            var dict = ReturnWindowHandlesWithTitles();
+            string windowHandle;
+            if (dict.TryGetValue(title, out windowHandle))
+            {
+                Driver.SwitchTo().Window(windowHandle);
+            }
+            else
+            {
+                throw new NoSuchWindowException();
+            }
+        }
+
+        //Change window using index/windowhandle
 
         public List<string> ReturnWindowHandles()
         {
+            System.Threading.Thread.Sleep(2000);
             string handle;
             var handleList=new List<string>();
             for (int i = 0; i < Driver.WindowHandles.Count; i++)
@@ -133,6 +160,12 @@ namespace AppacitiveAutomationFramework
             }
             return handleList;
         }
+
+        public void ChangeCurrentWindowUsingIndex(string windowHandle)
+        {
+            Driver.SwitchTo().Window(windowHandle);
+        }
+
 
         public List<IUIWebElement> GetUIElements(string controlName)
         {
