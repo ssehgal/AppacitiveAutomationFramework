@@ -78,6 +78,36 @@ namespace AppacitiveAutomationFramework
             return null;
         }
 
+
+        public IUIWebElement MatchByPartialLinkText(string textToMatch)
+        {
+            IWebElement toReturn = null;
+            Exception e = null;
+            System.Threading.Thread.Sleep(2000);
+            
+                        try
+                        {
+                            LogProvider.DefaultLogger.Log("Looking for: " + textToMatch);
+                            toReturn = Context.FindElement(By.PartialLinkText(textToMatch));
+                            if (toReturn != null)
+                            {
+                                LogProvider.DefaultLogger.Log("Got " + textToMatch);
+                            }
+                        }
+                        catch (Exception e1)
+                        {
+                            LogProvider.DefaultLogger.Log("Could not get " + textToMatch);
+                            e = e1;
+                        }
+            if (toReturn == null) return null;
+            var element = new UIElement(toReturn, textToMatch);
+            element.Driver = Driver;
+            element.Context = element;
+            element.Controls = Controls;
+            System.Threading.Thread.Sleep(2000);
+            return element;
+        }
+
         public IUIWebElement GetUIElementById(string controlName)
         {
             IWebElement toReturn = null;

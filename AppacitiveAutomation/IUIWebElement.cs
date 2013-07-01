@@ -210,6 +210,7 @@ namespace AppacitiveAutomationFramework
         IUIWebElement GetUIElementBySelector(string controlName);
         IUIWebElement WaitAndGetBySelector(string controlName, int timeInSeconds);
         IUIWebElement GetUIElementById(string controlName);
+        IUIWebElement MatchByPartialLinkText(string textToMatch);
         List<IUIWebElement> GetUIElements(string controlName);
     }
 }
