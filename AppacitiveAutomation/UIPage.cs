@@ -15,7 +15,6 @@ namespace AppacitiveAutomationFramework
         // internally holds reference(s) to the controls' data file.
 
         private List<UIControlSet> _controls = new List<UIControlSet>();
-        private IWebDriver _driver;
         private UIControlCollection _controlCollection = new UIControlCollection();
 
         public UIPage LoadControls(params string[] controlFiles)
@@ -27,14 +26,13 @@ namespace AppacitiveAutomationFramework
 
         public void SetDriver(IWebDriver driver)
         {
-            _driver = driver;
             this.Driver = driver;
             this.Context = driver;
         }
 
         public void ExecuteJavascript(string js)
         {
-            ((IJavaScriptExecutor)_driver).ExecuteScript(js);
+            ((IJavaScriptExecutor)Driver).ExecuteScript(js);
         }
 
     }

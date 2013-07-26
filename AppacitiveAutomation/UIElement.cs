@@ -12,7 +12,6 @@ namespace AppacitiveAutomationFramework
     {
         private IWebElement _element;
         private string _controlName = string.Empty;
-        internal IWebDriver Driver { get; set; }
         public UIElement(IWebElement element)
         {
             _element = element;
